@@ -430,7 +430,7 @@ const generatePerformanceChart = (age, retirementAge, paymentsDuration, monthlyP
   const total = investedAmount + nonRiskyAssetsPerformance + riskyAssetsPerformance - fee;
   
   const gainRatio = calculateGainRatio(total, effectivePaymentsTotal.effectivePayment)
-  document.getElementById("gain-ratio").innerText = `Mon coefficient multiplicateur : ${gainRatio.toFixed(1)}x`;
+  // document.getElementById("gain-ratio").innerText = `Mon coefficient multiplicateur : ${gainRatio.toFixed(1)}x`;
 
   const labels = ["Versements", "Performance", "Total"]
   const ctx = document.getElementById("performance-chart").getContext("2d");
