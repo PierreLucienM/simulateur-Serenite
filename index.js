@@ -336,27 +336,22 @@ const rates = [
   0.5346,
 ]
 
-
-const getInvesterProfile = (profile) => profiles[profile];
-
 const getRiskyAssetsRates = (investmentDurationMonths) => {
-  const monthlyRiskyAssetsRates = worldStandard.slice(-investmentDurationMonths);
-  return monthlyRiskyAssetsRates;
+  return worldStandard.slice(-investmentDurationMonths);
 }
 
 const getNonRiskyAssetsRates = (investmentDurationMonths) => {
-  const monthlyNonRiskyAssetsRates = rates.reduce(
+  const nonRiskyAssetsRatesPerMonth = rates.reduce(
     (acc, rate, index) => {
       const monthlyRate = (rate - rates[index + 1]) / 12;
       return [...acc, ...Array(12).fill(rate).map((item, i) => item - (i * monthlyRate))];
     },
     []
   ).slice(0, investmentDurationMonths).reverse();
-  return monthlyNonRiskyAssetsRates;
+  return nonRiskyAssetsRatesPerMonth;
 }
 
 let taxGainChart;
-let performanceChart;
 
 const generateTaxGainChart = (age, retirementAge, paymentsDuration, monthlyAmount, tmi, tis) => {
   const effectivePayments = calculateEffectivePayments(age, retirementAge, paymentsDuration, monthlyAmount, tmi, tis);
@@ -408,29 +403,34 @@ const generateTaxGainChart = (age, retirementAge, paymentsDuration, monthlyAmoun
   });
 }
 
+let performanceChart;
+
 const generatePerformanceChart = (age, retirementAge, paymentsDuration, monthlyPayment, tmi, tis, profile) => {
   const effectivePayments = calculateEffectivePayments(age, retirementAge, paymentsDuration, monthlyPayment, tmi, tis);
   const effectivePaymentsTotal = effectivePayments.reverse()[0];
-  const investerProfile = getInvesterProfile(profile);
+  const investerProfile = profiles[profile];
   const investedAmount = effectivePaymentsTotal.effectivePayment + effectivePaymentsTotal.taxGain;
   const investmentDurationMonths = getInvestmentDuration(age, retirementAge) * 12;
   const paymentsDurationMonths = paymentsDuration * 12;
 
   // Calculate risky assets performance
-  const monthlyRiskyAssetsRates = getRiskyAssetsRates(investmentDurationMonths)
+  const riskyAssetsRatesPerMonth = getRiskyAssetsRates(investmentDurationMonths)
   const riskyAssetsMonthlyPayment = monthlyPayment * investerProfile.risky
-  const riskyAssets = calculateStocksValue(riskyAssetsMonthlyPayment, investmentDurationMonths, paymentsDurationMonths, monthlyRiskyAssetsRates)
-  const riskyAssetsPerformance = calculateStocksPerformance(riskyAssets, investerProfile.risky, investedAmount);
+  const riskyAssets = calculateStocksValue(riskyAssetsMonthlyPayment, investmentDurationMonths, paymentsDurationMonths, riskyAssetsRatesPerMonth)
+  const riskyAssetsPerformance = calculateStocksPerformance(riskyAssets.total, investerProfile.risky, investedAmount);
 
   // Calculate non risky assets performance
-  const monthlyNonRiskyAssetsRates = getNonRiskyAssetsRates(investmentDurationMonths)
+  const nonRiskyAssetsRatesPerMonth = getNonRiskyAssetsRates(investmentDurationMonths)
   const nonRiskyAssetsMonthlyPayment = monthlyPayment * investerProfile.nonRisky
-  const nonRiskyAssets = calculateStocksValue(nonRiskyAssetsMonthlyPayment, investmentDurationMonths, paymentsDurationMonths, monthlyNonRiskyAssetsRates)
-  const nonRiskyAssetsPerformance = calculateStocksPerformance(nonRiskyAssets, investerProfile.nonRisky, investedAmount);
+  const nonRiskyAssets = calculateStocksValue(nonRiskyAssetsMonthlyPayment, investmentDurationMonths, paymentsDurationMonths, nonRiskyAssetsRatesPerMonth)
+  const nonRiskyAssetsPerformance = calculateStocksPerformance(nonRiskyAssets.total, investerProfile.nonRisky, investedAmount);
 
-  const fees = calculateFees();
-  const total = investedAmount + nonRiskyAssetsPerformance + riskyAssetsPerformance - fees
+  const fee = riskyAssets.fee + nonRiskyAssets.fee
+  console.log(fee)
+  const total = investedAmount + nonRiskyAssetsPerformance + riskyAssetsPerformance - fee;
+  
   const gainRatio = calculateGainRatio(total, effectivePaymentsTotal.effectivePayment)
+  document.getElementById("gain-ratio").innerText = `Mon coefficient multiplicateur : ${gainRatio.toFixed(1)}x`;
 
   const labels = ["Versements", "Performance", "Total"]
   const ctx = document.getElementById("performance-chart").getContext("2d");
@@ -448,31 +448,31 @@ const generatePerformanceChart = (age, retirementAge, paymentsDuration, monthlyP
           label: "Versement Effectif",
           data: [effectivePaymentsTotal.effectivePayment, 0, 0],
           backgroundColor: "rgb(56, 69, 144)",
-          barThickness: 100
+          barThickness: 50
         },
         {
           label: "Gain Fiscal",
           data: [effectivePaymentsTotal.taxGain, 0, 0],
           backgroundColor: "rgb(20, 20, 74)",
-          barThickness: 100
+          barThickness: 50
         },
         {
           label: "Intérêts Garantis",
           data: [0, nonRiskyAssetsPerformance, 0],
           backgroundColor: "rgb(20, 20, 70)",
-          barThickness: 100
+          barThickness: 50
         },
         {
           label: "Performance Actions",
           data: [0, riskyAssetsPerformance, 0],
           backgroundColor: "rgb(130, 139, 188)",
-          barThickness: 100
+          barThickness: 50
         },
         {
           label: "Total Frais Inclus",
           data: [0, 0, total],
           backgroundColor: "rgb(28, 175, 102)",
-          barThickness: 100
+          barThickness: 50
         }
       ]
     },
@@ -499,6 +499,7 @@ const generatePerformanceChart = (age, retirementAge, paymentsDuration, monthlyP
     },
   });
 }
+
 const profiles = { safe: { nonRisky: 1, risky: 0 }, careful: { nonRisky: .7, risky: .3 }, balanced: { nonRisky: .5, risky: .5 } };
 
 const getInvestmentDuration = (age, retirementAge) => Math.min(retirementAge - age, 30);
@@ -524,22 +525,32 @@ const calculateEffectivePayments = (age, retirementAge, paymentsDuration, monthl
 
 const calculateStocksValue = (monthlyPayment, investmentDuration, paymentsDuration, rates) => {
   let totalStocksValue = 0;
+  const feesRate = 1 - (0.012 / 12);
+  let totalStocksValueWithFees = 0;
 
   for (let i = 0; i < investmentDuration; i++) {
     const currentRate = rates[i];
     const currentValue = monthlyPayment / currentRate;
-    if (i < paymentsDuration) totalStocksValue += currentValue;
-  }
-
+    if (i < paymentsDuration) {
+      totalStocksValue += currentValue;
+      totalStocksValueWithFees = (totalStocksValueWithFees + currentValue) * feesRate;
+    } else {
+      totalStocksValueWithFees = totalStocksValueWithFees * feesRate;
+    }
+  } 
   const lastRate = rates[investmentDuration - 1];
-  return lastRate * totalStocksValue;
+  
+  const total = totalStocksValue * lastRate;
+  const totalWithFee = totalStocksValueWithFees * lastRate;
+
+  const fee = total - totalWithFee;
+
+  return { total, fee }
 };
 
 const calculateStocksPerformance = (value, ratio, investedAmount) => Math.ceil(value - (ratio * investedAmount));
 
 const calculateGainRatio = (total, effectivePayment) => total / effectivePayment;
-
-const calculateFees = () => 63716;
 
 const getCheckedValue = name => {
   const elements = document.getElementsByName(name);
@@ -576,11 +587,9 @@ const handleSimulatePerformance = () => {
 };
 
 const displayCharts = () => {
-  // handleSimulateTaxGain();
+  handleSimulateTaxGain();
   handleSimulatePerformance();
 }
-
-document.getElementById("simulate-button").addEventListener("click", displayCharts);
 
 const setDurationDisplay = (name) => {
   const input = document.getElementById(name);
@@ -609,6 +618,7 @@ const addRadioLabelListeners = () => {
 };
 
 document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById("simulate-button").addEventListener("click", displayCharts);
   setDurationDisplay("age");
   setDurationDisplay("payments-duration");
   addRadioLabelListeners();
