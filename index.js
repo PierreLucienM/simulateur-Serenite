@@ -576,11 +576,11 @@ const handleSimulatePerformance = () => {
 };
 
 const displayCharts = () => {
-  handleSimulateTaxGain();
+  // handleSimulateTaxGain();
   handleSimulatePerformance();
 }
 
-document.getElementById("simulate-tax-gain").addEventListener("click", displayCharts);
+document.getElementById("simulate-button").addEventListener("click", displayCharts);
 
 const setDurationDisplay = (name) => {
   const input = document.getElementById(name);
