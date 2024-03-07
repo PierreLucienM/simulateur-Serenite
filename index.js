@@ -575,9 +575,12 @@ const handleSimulatePerformance = () => {
   generatePerformanceChart(age, retirementAge, paymentsDuration, monthlyAmount, tmi, tis, profile);
 };
 
-document.getElementById("simulate-tax-gain").addEventListener("click", handleSimulateTaxGain);
+const displayCharts = () => {
+  handleSimulateTaxGain();
+  handleSimulatePerformance();
+}
 
-document.getElementById("simulate-performance").addEventListener("click", handleSimulatePerformance);
+document.getElementById("simulate-tax-gain").addEventListener("click", displayCharts);
 
 const setDurationDisplay = (name) => {
   const input = document.getElementById(name);
