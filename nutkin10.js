@@ -681,6 +681,10 @@ const setDisplayButtonListeners = () => {
   profileRadioButtons.forEach(button => {
     button.addEventListener('change', checkFields);
   });
+  
+  frequencyRadioButtons.forEach(button => {
+    button.addEventListener('change', checkFields);
+  });
 }
 
 
