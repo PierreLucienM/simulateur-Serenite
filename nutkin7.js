@@ -393,13 +393,19 @@ const generateTaxGainChart = (age, retirementAge, paymentsDuration, monthlyAmoun
         y: {
           stacked: true,
           ticks: {
+            stepSize: 50000,
             callback: function (value, index, values) {
               return `${value} €`;
             }
           }
         }
+      },
+      plugins: {
+        legend: {
+          position: 'bottom'
+        }
       }
-    },
+    }
   });
 }
 
@@ -491,10 +497,16 @@ const generatePerformanceChart = (age, retirementAge, paymentsDuration, monthlyP
             display: false
           },
           ticks: {
+            stepSize: 100000,
             callback: function (value, index, values) {
               return `${value} €`;
             }
           }
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'bottom'
         }
       }
     },
@@ -592,7 +604,7 @@ const displayCharts = () => {
   handleSimulatePerformance();
 }
 
-const setDurationDisplay = (name) => {
+const setDurationInputListener = (name) => {
   const input = document.getElementById(name);
   const defaultValue = input.value;
   document.getElementById(`${name}-display`).innerText = `${defaultValue} ans`;
@@ -603,7 +615,7 @@ const setDurationDisplay = (name) => {
   });
 };
 
-const addRadioLabelListeners = () => {
+const setRadioLabelListeners = () => {
   const labels = document.querySelectorAll('label');
 
   labels.forEach(label => {
@@ -618,10 +630,62 @@ const addRadioLabelListeners = () => {
   });
 };
 
+const setDisplayButtonListeners = () => {
+  const ageField = document.getElementById('age');
+  const retirementAgeField = document.getElementById('retirement-age');
+  const paymentAmountField = document.getElementById('payment-amount');
+  const tmiField = document.getElementById('tmi');
+  const tisField = document.getElementById('tis');
+  const paymentsDurationField = document.getElementById('payments-duration');
+  const profileRadioButtons = document.querySelectorAll('input[name="profile"]');
+
+  function checkFields() {
+    let allFieldsFilled = true;
+
+    [ageField, retirementAgeField, paymentAmountField, tmiField, tisField, paymentsDurationField].forEach(field => {
+      if (!field.value.trim()) {
+        console.log(field.value.trim())
+        allFieldsFilled = false;
+      }
+    })
+
+    let profileRadioButtonChecked = false;
+    profileRadioButtons.forEach(button => {
+      if (button.checked) {
+        profileRadioButtonChecked = true;
+      }
+    });
+
+    if (allFieldsFilled && profileRadioButtonChecked) {
+      document.getElementById("simulate-button").style.display = "block";
+    } else {
+      document.getElementById("simulate-button").style.display = "none";
+    }
+  }
+
+  checkFields();
+
+  [ageField, retirementAgeField, paymentAmountField, tmiField, tisField, paymentsDurationField].forEach(field => {
+    field.addEventListener('input', checkFields);
+  });
+
+  profileRadioButtons.forEach(button => {
+    button.addEventListener('change', checkFields);
+  });
+}
+
+
 document.addEventListener('DOMContentLoaded', function () {
+  // Hide simulate button until all inputs are filled
+  document.getElementById("simulate-button").style.display = "none";
+
+  // Hide gain ratio container until the simulate button is clicked
   document.getElementById("gain-ratio-container").style.display = "none";
+
   document.getElementById("simulate-button").addEventListener("click", displayCharts);
-  setDurationDisplay("age");
-  setDurationDisplay("payments-duration");
-  addRadioLabelListeners();
+
+  setDurationInputListener("age");
+  setDurationInputListener("payments-duration");
+  setRadioLabelListeners();
+  setDisplayButtonListeners()
 }); 
