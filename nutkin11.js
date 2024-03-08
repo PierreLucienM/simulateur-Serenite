@@ -436,8 +436,8 @@ const generatePerformanceChart = (age, retirementAge, paymentsDuration, monthlyP
   const total = investedAmount + nonRiskyAssetsPerformance + riskyAssetsPerformance - fee;
   
   const gainRatio = calculateGainRatio(total, effectivePaymentsTotal.effectivePayment)
-  document.getElementById("gain-ratio").innerText = `x${gainRatio.toFixed(1)}`;
-  document.getElementById("gain-ratio-container").style.display = "block";
+  // document.getElementById("gain-ratio").innerText = `x${gainRatio.toFixed(1)}`;
+  // document.getElementById("gain-ratio-container").style.display = "block";
 
   const labels = ["Versements", "Performance", "Total"]
   const ctx = document.getElementById("performance-chart").getContext("2d");
@@ -693,7 +693,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById("simulate-button").style.display = "none";
 
   // Hide gain ratio container until the simulate button is clicked
-  document.getElementById("gain-ratio-container").style.display = "none";
+  // document.getElementById("gain-ratio-container").style.display = "none";
 
   document.getElementById("simulate-button").addEventListener("click", displayCharts);
 
