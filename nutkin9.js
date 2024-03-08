@@ -593,7 +593,8 @@ const handleSimulatePerformance = () => {
   const tmi = parseInt(getValueById("tmi"));
   const tis = parseInt(getValueById("tis"));
   const paymentsDuration = parseInt(getValueById("payments-duration"));
-  const monthlyAmount = parseInt(getValueById("payment-amount"));
+  const frequency = parseInt(getCheckedValue("frequency"));
+  const monthlyAmount = parseInt(getValueById("payment-amount")) / frequency;
   const profile = getCheckedValue("profile");
 
   generatePerformanceChart(age, retirementAge, paymentsDuration, monthlyAmount, tmi, tis, profile);
@@ -638,6 +639,7 @@ const setDisplayButtonListeners = () => {
   const tisField = document.getElementById('tis');
   const paymentsDurationField = document.getElementById('payments-duration');
   const profileRadioButtons = document.querySelectorAll('input[name="profile"]');
+  const frequencyRadioButtons = document.querySelectorAll('input[name="frequency"]');
 
   function checkFields() {
     let allFieldsFilled = true;
@@ -655,8 +657,15 @@ const setDisplayButtonListeners = () => {
         profileRadioButtonChecked = true;
       }
     });
+    
+    let frequencyRadioButtonsChecked = false;
+    frequencyRadioButtons.forEach(button => {
+      if (button.checked) {
+        frequencyRadioButtonsChecked = true;
+      }
+    });
 
-    if (allFieldsFilled && profileRadioButtonChecked) {
+    if (allFieldsFilled && profileRadioButtonChecked && frequencyRadioButtonsChecked) {
       document.getElementById("simulate-button").style.display = "block";
     } else {
       document.getElementById("simulate-button").style.display = "none";
