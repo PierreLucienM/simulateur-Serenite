@@ -376,13 +376,13 @@ const generateTaxGainChart = (age, retirementAge, paymentsDuration, monthlyAmoun
           label: "Versement Effectif",
           data: effectivePaymentData,
           backgroundColor: "rgb(56, 69, 144)",
-          barThickness: 10,
+          barThickness: 15,
         },
         {
           label: "Gain Fiscal",
           data: taxGainData,
           backgroundColor: "rgb(20, 20, 74)",
-          barThickness: 10,  
+          barThickness: 15,  
         }
       ],
     },
