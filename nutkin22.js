@@ -377,11 +377,13 @@ const generateTaxGainChart = (age, retirementAge, paymentsDuration, monthlyAmoun
           label: "Versement Effectif",
           data: effectivePaymentData,
           backgroundColor: "rgb(56, 69, 144)",
+          barThickness: 10,
         },
         {
           label: "Gain Fiscal",
           data: taxGainData,
           backgroundColor: "rgb(20, 20, 74)",
+          barThickness: 10,  
         }
       ],
     },
@@ -409,16 +411,22 @@ const generateTaxGainChart = (age, retirementAge, paymentsDuration, monthlyAmoun
         },
         datalabels: {
           font: {
-            size: 4
+            size: 8,
+            weight: "bold"
           },
-          color: "white",
+          backgroundColor: "white",
+          borderRadius: 4,
+          borderColor: "rgb(20, 20, 74)",
+          borderWidth: 1,
+          color: "rgb(20, 20, 74)",
+          padding: 2,
+          formatter: function(value, context) {
+              return `${Math.ceil(value)} €`;
+          },
           display: (context) => {
             return context.dataIndex === context.dataset.data.length - 1;
           },
-          formatter: function(value, context) {
-            return `${Math.ceil(value)} €`;
-          }
-        }
+        },
       },
     }
   });
@@ -524,14 +532,21 @@ const generatePerformanceChart = (age, retirementAge, paymentsDuration, monthlyP
         },
         datalabels: {
             font: {
-              size: 6
+              size: 8,
+              weight: "bold"
             },
             color: "white",
             formatter: function(value, context) {
-              if (value)
                 return `${Math.ceil(value)} €`;
-              return "";
-            }
+            },
+            display: function(context) {
+              return context.dataset.data[context.dataIndex] > 0;
+            },
+        },
+        tooltip: {
+          filter: function (tooltipItem, data) {
+            return !!tooltipItem.raw
+          },
         }
       }
     },
@@ -735,7 +750,18 @@ const setMaxDurationListeners = () => {
   }
 }
 
+const preventNumberInputFromChangingOnMouseWheel = () => {
+  const numberInputs = document.querySelectorAll('input[type="number"]');
+  
+  numberInputs.forEach(function(input) {
+      input.addEventListener('mousewheel', function(event) {
+          event.preventDefault();
+      }, { passive: false });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
+  preventNumberInputFromChangingOnMouseWheel()
   document.getElementById("tmi").value = 30;
   document.getElementById("tis").value = 15;
 
