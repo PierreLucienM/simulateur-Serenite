@@ -731,10 +731,10 @@ const setMaxDurationListeners = () => {
 
     durationInput.max = maxDuration;
 
-    // if (parseInt(durationInput.value) > maxDuration) {
+    if (parseInt(durationInput.value) > maxDuration) {
       durationInput.value = maxDuration;
       durationDisplay.innerText = `${maxDuration} ans`;
-    // }
+    }
   }
 }
 
