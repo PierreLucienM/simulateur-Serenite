@@ -466,8 +466,30 @@ const generatePerformanceChart = (age, retirementAge, paymentsDuration, monthlyP
     performanceChart.destroy();
   }
 
+  const triangleBackgroundPlugin = {
+    id: 'triangleBackground',
+    beforeDraw: (chart, args, options) => {
+      const { ctx } = chart;
+      ctx.save();
+      ctx.globalCompositeOperation = 'destination-over';
+      ctx.fillStyle = options.color || '#99ffff';
+  
+      // Clear the previous rectangle
+      ctx.clearRect(65, -30, chart.width, chart.height);
+  
+      ctx.beginPath();
+      const xAxis = chart.scales.x;
+      const yAxis = chart.scales.y;
+      ctx.moveTo(xAxis.left, yAxis.bottom);
+      ctx.lineTo(xAxis.right, yAxis.bottom);
+      ctx.lineTo(xAxis.right, yAxis.top);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+  }}
+
   performanceChart = new Chart(ctx, {
-    plugins: [ChartDataLabels],
+    plugins: [ChartDataLabels, triangleBackgroundPlugin],
     type: "bar",
     data: {
       labels: labels,
@@ -526,6 +548,9 @@ const generatePerformanceChart = (age, retirementAge, paymentsDuration, monthlyP
         }
       },
       plugins: {
+        triangleBackground: {
+          color: "rgb(241, 242, 255)"
+        },
         legend: {
           display: false,
         },
@@ -546,7 +571,7 @@ const generatePerformanceChart = (age, retirementAge, paymentsDuration, monthlyP
           filter: function (tooltipItem, data) {
             return !!tooltipItem.raw
           },
-        }
+        },
       }
     },
   });
