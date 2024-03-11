@@ -387,6 +387,11 @@ const generateTaxGainChart = (age, retirementAge, paymentsDuration, monthlyAmoun
       ],
     },
     options: {
+      layout: {
+        padding: {
+          right: 20
+        }
+      },
       scales: {
         x: {
           stacked: true,
