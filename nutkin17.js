@@ -451,8 +451,6 @@ const generatePerformanceChart = (age, retirementAge, paymentsDuration, monthlyP
   const total = investedAmount + nonRiskyAssetsPerformance + riskyAssetsPerformance - fee; 
   
   const gainRatio = calculateGainRatio(total, effectivePaymentsTotal.effectivePayment)
-  // document.getElementById("gain-ratio").innerText = `x${gainRatio.toFixed(1)}`;
-  // document.getElementById("gain-ratio-container").style.display = "block";
 
   const labels = ["Versements", "Performance", "Total"]
   const ctx = document.getElementById("performance-chart").getContext("2d");
@@ -714,10 +712,11 @@ const setDisplayButtonListeners = () => {
   });
 }
 
-const setMaxDurationLinsteners = () => {
+const setMaxDurationListeners = () => {
   const ageInput = document.getElementById('age');
   const retirementAgeInput = document.getElementById('retirement-age');
   const durationInput = document.getElementById('payments-duration');
+  const durationDisplay = document.getElementById('payments-duration-display');
 
   // Add event listeners to update max and value attributes
   ageInput.addEventListener('input', updateMaxAndValue);
@@ -727,15 +726,11 @@ const setMaxDurationLinsteners = () => {
   function updateMaxAndValue() {
     const age = parseInt(ageInput.value);
     const retirementAge = parseInt(retirementAgeInput.value);
-    const maxDuration = retirementAge - age;
+    const maxDuration = Math.max(retirementAge - age, 0);
 
-    // Set the max attribute of duration input
     durationInput.max = maxDuration;
-
-    // Set the value attribute of duration input
-    if (parseInt(durationInput.value) > maxDuration) {
-      durationInput.value = maxDuration;
-    }
+    durationInput.value = maxDuration;
+    durationDisplay.innerText = `${maxDuration} ans`;
   }
 }
 
@@ -746,13 +741,10 @@ document.addEventListener('DOMContentLoaded', function () {
   // Hide simulate button until all inputs are filled
   document.getElementById("simulate-button").style.display = "none";
   
-  // Hide gain ratio container until the simulate button is clicked
-  // document.getElementById("gain-ratio-container").style.display = "none";
   document.getElementById("simulate-button").addEventListener("click", displayCharts);
-
   setDurationInputListener("age");
   setDurationInputListener("payments-duration");
   setRadioLabelListeners();
   setDisplayButtonListeners();
-  setMaxDurationLinsteners();
+  setMaxDurationListeners();
 }); 
