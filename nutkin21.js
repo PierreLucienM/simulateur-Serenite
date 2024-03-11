@@ -728,13 +728,10 @@ const setMaxDurationListeners = () => {
     const age = parseInt(ageInput.value);
     const retirementAge = parseInt(retirementAgeInput.value);
     const maxDuration = Math.max(retirementAge - age, 8);
-
+    
     durationInput.max = maxDuration;
-
-    if (parseInt(durationInput.value) > maxDuration) {
-      durationInput.value = maxDuration;
-      durationDisplay.innerText = `${maxDuration} ans`;
-    }
+    durationInput.value = Math.min(maxDuration, durationInput.value);
+    durationDisplay.innerText = `${durationInput.value} ans`;
   }
 }
 
