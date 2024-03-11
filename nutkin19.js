@@ -721,19 +721,20 @@ const setMaxDurationListeners = () => {
   // Add event listeners to update max and value attributes
   ageInput.addEventListener('input', updateMaxAndValue);
   retirementAgeInput.addEventListener('input', updateMaxAndValue);
+  retirementAgeInput.min = parseInt(ageInput.value) + 8;
 
   // Function to update max and value attributes of duration input
   function updateMaxAndValue() {
     const age = parseInt(ageInput.value);
     const retirementAge = parseInt(retirementAgeInput.value);
-    const maxDuration = Math.max(retirementAge - age, 0);
+    const maxDuration = Math.max(retirementAge - age, 8);
 
     durationInput.max = maxDuration;
 
-    if (parseInt(durationInput.value) > maxDuration) {
+    // if (parseInt(durationInput.value) > maxDuration) {
       durationInput.value = maxDuration;
       durationDisplay.innerText = `${maxDuration} ans`;
-    }
+    // }
   }
 }
 
