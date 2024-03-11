@@ -340,6 +340,7 @@ const getRiskyAssetsRates = (investmentDurationMonths) => {
   return worldStandard.slice(-investmentDurationMonths);
 }
 
+
 const getNonRiskyAssetsRates = (investmentDurationMonths) => {
   const nonRiskyAssetsRatesPerMonth = rates.reduce(
     (acc, rate, index) => {
@@ -402,7 +403,7 @@ const generateTaxGainChart = (age, retirementAge, paymentsDuration, monthlyAmoun
       },
       plugins: {
         legend: {
-          position: 'bottom'
+          display: false
         }
       }
     }
@@ -506,7 +507,7 @@ const generatePerformanceChart = (age, retirementAge, paymentsDuration, monthlyP
       },
       plugins: {
         legend: {
-          position: 'bottom'
+          display: false,
         }
       }
     },
@@ -642,7 +643,7 @@ const setDisplayButtonListeners = () => {
   const profileRadioButtons = document.querySelectorAll('input[name="profile"]');
   const frequencyRadioButtons = document.querySelectorAll('input[name="frequency"]');
 
-  function checkFields() {
+  const checkFields = () => {
     let allFieldsFilled = true;
 
     [ageField, retirementAgeField, paymentAmountField, tmiField, tisField, paymentsDurationField].forEach(field => {
@@ -688,11 +689,39 @@ const setDisplayButtonListeners = () => {
   });
 }
 
+const setMaxDurationLinsteners = () => {
+  const ageInput = document.getElementById('age');
+  const retirementAgeInput = document.getElementById('retirement-age');
+  const durationInput = document.getElementById('payments-duration');
+
+  // Add event listeners to update max and value attributes
+  ageInput.addEventListener('input', updateMaxAndValue);
+  retirementAgeInput.addEventListener('input', updateMaxAndValue);
+
+  // Function to update max and value attributes of duration input
+  function updateMaxAndValue() {
+    const age = parseInt(ageInput.value);
+    const retirementAge = parseInt(retirementAgeInput.value);
+    const maxDuration = retirementAge - age;
+
+    // Set the max attribute of duration input
+    durationInput.max = maxDuration;
+
+    // Set the value attribute of duration input
+    if (parseInt(durationInput.value) > maxDuration) {
+      durationInput.value = maxDuration;
+    }
+  }
+}
 
 document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById("tmi").value = 30;
+  document.getElementById("tis").value = 15;
+  document.getElementById("profile-choice-one").checked = true;
+
   // Hide simulate button until all inputs are filled
   document.getElementById("simulate-button").style.display = "none";
-
+  
   // Hide gain ratio container until the simulate button is clicked
   // document.getElementById("gain-ratio-container").style.display = "none";
 
@@ -701,5 +730,6 @@ document.addEventListener('DOMContentLoaded', function () {
   setDurationInputListener("age");
   setDurationInputListener("payments-duration");
   setRadioLabelListeners();
-  setDisplayButtonListeners()
+  setDisplayButtonListeners();
+  setMaxDurationLinsteners();
 }); 
