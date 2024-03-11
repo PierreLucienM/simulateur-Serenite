@@ -359,6 +359,7 @@ const generateTaxGainChart = (age, retirementAge, paymentsDuration, monthlyAmoun
   const labels = effectivePayments.map((payment, index) => `Année ${index + 1}`);
   const effectivePaymentData = effectivePayments.map(payment => payment.effectivePayment);
   const taxGainData = effectivePayments.map(payment => payment.taxGain);
+  const totals = effectivePaymentData.map((value, index) => value + taxGainData[index]);
 
   const ctx = document.getElementById("tax-gain-chart").getContext("2d");
 
@@ -367,6 +368,7 @@ const generateTaxGainChart = (age, retirementAge, paymentsDuration, monthlyAmoun
   }
 
   taxGainChart = new Chart(ctx, {
+    plugins: [ChartDataLabels],
     type: "bar",
     data: {
       labels: labels,
@@ -374,14 +376,14 @@ const generateTaxGainChart = (age, retirementAge, paymentsDuration, monthlyAmoun
         {
           label: "Versement Effectif",
           data: effectivePaymentData,
-          backgroundColor: "rgb(56, 69, 144)"
+          backgroundColor: "rgb(56, 69, 144)",
         },
         {
           label: "Gain Fiscal",
           data: taxGainData,
-          backgroundColor: "rgb(20, 20, 74)"
+          backgroundColor: "rgb(20, 20, 74)",
         }
-      ]
+      ],
     },
     options: {
       scales: {
@@ -404,8 +406,20 @@ const generateTaxGainChart = (age, retirementAge, paymentsDuration, monthlyAmoun
       plugins: {
         legend: {
           display: false
+        },
+        datalabels: {
+          font: {
+            size: 4
+          },
+          color: "white",
+          display: (context) => {
+            return context.dataIndex === context.dataset.data.length - 1;
+          },
+          formatter: function(value, context) {
+            return `${Math.ceil(value)} €`;
+          }
         }
-      }
+      },
     }
   });
 }
@@ -448,6 +462,7 @@ const generatePerformanceChart = (age, retirementAge, paymentsDuration, monthlyP
   }
 
   performanceChart = new Chart(ctx, {
+    plugins: [ChartDataLabels],
     type: "bar",
     data: {
       labels: labels,
@@ -456,13 +471,13 @@ const generatePerformanceChart = (age, retirementAge, paymentsDuration, monthlyP
           label: "Versement Effectif",
           data: [effectivePaymentsTotal.effectivePayment, 0, 0],
           backgroundColor: "rgb(56, 69, 144)",
-          barThickness: 50
+          barThickness: 50,
         },
         {
           label: "Gain Fiscal",
           data: [effectivePaymentsTotal.taxGain, 0, 0],
           backgroundColor: "rgb(20, 20, 74)",
-          barThickness: 50
+          barThickness: 50,
         },
         {
           label: "Intérêts Garantis",
@@ -508,6 +523,17 @@ const generatePerformanceChart = (age, retirementAge, paymentsDuration, monthlyP
       plugins: {
         legend: {
           display: false,
+        },
+        datalabels: {
+            font: {
+              size: 6
+            },
+            color: "white",
+            formatter: function(value, context) {
+              if (value)
+                return `${Math.ceil(value)} €`;
+              return "";
+            }
         }
       }
     },
@@ -648,7 +674,6 @@ const setDisplayButtonListeners = () => {
 
     [ageField, retirementAgeField, paymentAmountField, tmiField, tisField, paymentsDurationField].forEach(field => {
       if (!field.value.trim()) {
-        console.log(field.value.trim())
         allFieldsFilled = false;
       }
     })
@@ -717,14 +742,12 @@ const setMaxDurationLinsteners = () => {
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById("tmi").value = 30;
   document.getElementById("tis").value = 15;
-  document.getElementById("balanced").checked = true;
 
   // Hide simulate button until all inputs are filled
   document.getElementById("simulate-button").style.display = "none";
   
   // Hide gain ratio container until the simulate button is clicked
   // document.getElementById("gain-ratio-container").style.display = "none";
-
   document.getElementById("simulate-button").addEventListener("click", displayCharts);
 
   setDurationInputListener("age");

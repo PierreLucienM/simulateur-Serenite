@@ -3,7 +3,8 @@
 
 <head>
   <title>Input Value Example</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 </head>
 
 <body>
@@ -15,15 +16,15 @@
     </div>
     <div style="display: flex; flex-direction: row;">
       <div>
-        <label for="profile-choice-one">Balanced</label>
-        <input type="radio" id="balanced" name="profile" value="balanced" />
+        <label for="balanced">Balanced</label>
+        <input type="radio" id="balanced" name="profile" value="balanced" checked />
       </div>
       <div>
-        <label for="profile-choice-two">Careful</label>
+        <label for="careful">Careful</label>
         <input type="radio" id="careful" name="profile" value="careful" />
       </div>
       <div>
-        <label for="profile-choice-three">Safe</label>
+        <label for="safe">Safe</label>
         <input type="radio" id="safe" name="profile" value="safe" />
       </div>
     </div>
@@ -70,7 +71,7 @@
     <canvas id="performance-chart" width="400" height="200"></canvas>
   </div>
 
-  <script type="text/javascript" src="nutkin14.js"></script>
+  <script type="text/javascript" src="nutkin15.js"></script>
 </body>
 
 </html>
