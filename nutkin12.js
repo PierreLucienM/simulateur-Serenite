@@ -426,14 +426,14 @@ const generatePerformanceChart = (age, retirementAge, paymentsDuration, monthlyP
   const riskyAssetsPerformance = calculateStocksPerformance(riskyAssets.total, investerProfile.risky, investedAmount);
 
   // Calculate non risky assets performance
-  const nonRiskyAssetsRatesPerMonth = getNonRiskyAssetsRates(investmentDurationMonths)
+  const nonRiskyAssetsRatesPerMonth = getNonRiskyAssetsRates(investmentDurationMonths) 
   const nonRiskyAssetsMonthlyPayment = monthlyPayment * investerProfile.nonRisky
   const nonRiskyAssets = calculateStocksValue(nonRiskyAssetsMonthlyPayment, investmentDurationMonths, paymentsDurationMonths, nonRiskyAssetsRatesPerMonth)
   const nonRiskyAssetsPerformance = calculateStocksPerformance(nonRiskyAssets.total, investerProfile.nonRisky, investedAmount);
 
   const fee = riskyAssets.fee + nonRiskyAssets.fee
   console.log(fee)
-  const total = investedAmount + nonRiskyAssetsPerformance + riskyAssetsPerformance - fee;
+  const total = investedAmount + nonRiskyAssetsPerformance + riskyAssetsPerformance - fee; 
   
   const gainRatio = calculateGainRatio(total, effectivePaymentsTotal.effectivePayment)
   // document.getElementById("gain-ratio").innerText = `x${gainRatio.toFixed(1)}`;
@@ -582,7 +582,8 @@ const handleSimulateTaxGain = () => {
   const tmi = parseInt(getValueById("tmi"));
   const tis = parseInt(getValueById("tis"));
   const paymentsDuration = parseInt(getValueById("payments-duration"));
-  const monthlyAmount = parseInt(getValueById("payment-amount"));
+  const frequency = parseInt(getCheckedValue("frequency"));
+  const monthlyAmount = parseInt(getValueById("payment-amount")) / frequency;
 
   generateTaxGainChart(age, retirementAge, paymentsDuration, monthlyAmount, tmi, tis);
 };
