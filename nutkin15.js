@@ -717,7 +717,7 @@ const setMaxDurationLinsteners = () => {
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById("tmi").value = 30;
   document.getElementById("tis").value = 15;
-  document.getElementById("profile-choice-one").checked = true;
+  document.getElementById("balanced").checked = true;
 
   // Hide simulate button until all inputs are filled
   document.getElementById("simulate-button").style.display = "none";
