@@ -359,7 +359,6 @@ const generateTaxGainChart = (age, retirementAge, paymentsDuration, monthlyAmoun
   const labels = effectivePayments.map((payment, index) => `Année ${index + 1}`);
   const effectivePaymentData = effectivePayments.map(payment => payment.effectivePayment);
   const taxGainData = effectivePayments.map(payment => payment.taxGain);
-  const totals = effectivePaymentData.map((value, index) => value + taxGainData[index]);
 
   const ctx = document.getElementById("tax-gain-chart").getContext("2d");
 
@@ -733,21 +732,24 @@ const setMaxDurationListeners = () => {
   const durationInput = document.getElementById('payments-duration');
   const durationDisplay = document.getElementById('payments-duration-display');
 
-  // Add event listeners to update max and value attributes
   ageInput.addEventListener('input', updateMaxAndValue);
   retirementAgeInput.addEventListener('input', updateMaxAndValue);
-  retirementAgeInput.min = parseInt(ageInput.value) + 8;
+  
 
-  // Function to update max and value attributes of duration input
   function updateMaxAndValue() {
     const age = parseInt(ageInput.value);
     const retirementAge = parseInt(retirementAgeInput.value);
-    const maxDuration = Math.max(retirementAge - age, 8);
-    
+    const maxDuration = Math.max(retirementAge - age, 0);    
     durationInput.max = maxDuration;
-    durationInput.value = Math.min(maxDuration, durationInput.value);
+
+    if (durationInput.value > maxDuration) {
+      durationInput.value = maxDuration
+    }
+    
     durationDisplay.innerText = `${durationInput.value} ans`;
   }
+
+  retirementAgeInput.min = ageInput.value;
 }
 
 const preventNumberInputFromChangingOnMouseWheel = () => {
