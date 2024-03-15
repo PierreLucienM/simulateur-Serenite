@@ -336,26 +336,26 @@ const rates = [
   0.5346,
 ]
 
-const getRiskyAssetsRates = (investmentDurationMonths) => {
-  return worldStandard.slice(-investmentDurationMonths);
+const getRiskyAssetsRatesPerMonth = (duration) => {
+  return worldStandard.slice(-duration);
 }
 
 
-const getNonRiskyAssetsRates = (investmentDurationMonths) => {
+const getNonRiskyAssetsRatesPerMonth = (duration) => {
   const nonRiskyAssetsRatesPerMonth = rates.reduce(
     (acc, rate, index) => {
       const monthlyRate = (rate - rates[index + 1]) / 12;
       return [...acc, ...Array(12).fill(rate).map((item, i) => item - (i * monthlyRate))];
     },
     []
-  ).slice(0, investmentDurationMonths).reverse();
+  ).slice(0, duration).reverse();
   return nonRiskyAssetsRatesPerMonth;
 }
 
 let taxGainChart;
 
-const generateTaxGainChart = (age, retirementAge, paymentsDuration, monthlyAmount, tmi, tis) => {
-  const effectivePayments = calculateEffectivePayments(age, retirementAge, paymentsDuration, monthlyAmount, tmi, tis);
+const generateTaxGainChart = (age, retirementAge, paymentsDuration, payment, frequency, tmi, tis) => {
+  const effectivePayments = calculateEffectivePayments(age, retirementAge, paymentsDuration, payment, frequency, tmi, tis);
   const labels = effectivePayments.map((payment, index) => `Année ${index + 1}`);
   const effectivePaymentData = effectivePayments.map(payment => payment.effectivePayment);
   const taxGainData = effectivePayments.map(payment => payment.taxGain);
@@ -436,33 +436,36 @@ const generateTaxGainChart = (age, retirementAge, paymentsDuration, monthlyAmoun
   });
 }
 
+
 let performanceChart;
 
-const generatePerformanceChart = (age, retirementAge, paymentsDuration, monthlyPayment, tmi, tis, profile) => {
-  const effectivePayments = calculateEffectivePayments(age, retirementAge, paymentsDuration, monthlyPayment, tmi, tis);
+const generatePerformanceChart = (age, retirementAge, paymentsDuration, payment, frequency, tmi, tis, profile) => {
+  const effectivePayments = calculateEffectivePayments(age, retirementAge, paymentsDuration, payment, frequency, tmi, tis);
   const effectivePaymentsTotal = effectivePayments.reverse()[0];
   const investerProfile = profiles[profile];
   const investedAmount = effectivePaymentsTotal.effectivePayment + effectivePaymentsTotal.taxGain;
-  const investmentDurationMonths = getInvestmentDuration(age, retirementAge) * 12;
+  const investmentDuration = getInvestmentDuration(age, retirementAge) * 12;
   const paymentsDurationMonths = paymentsDuration * 12;
 
   // Calculate risky assets performance
-  const riskyAssetsRatesPerMonth = getRiskyAssetsRates(investmentDurationMonths)
-  const riskyAssetsMonthlyPayment = monthlyPayment * investerProfile.risky
-  const riskyAssets = calculateStocksValue(riskyAssetsMonthlyPayment, investmentDurationMonths, paymentsDurationMonths, riskyAssetsRatesPerMonth)
+  const riskyAssetsRatesPerMonth = getRiskyAssetsRatesPerMonth(investmentDuration)
+  const riskyAssetsPayment = payment * investerProfile.risky
+  const riskyAssets = calculateStocksValue(riskyAssetsPayment, investmentDuration, paymentsDurationMonths, riskyAssetsRatesPerMonth, frequency)
   const riskyAssetsPerformance = calculateStocksPerformance(riskyAssets.total, investerProfile.risky, investedAmount);
 
   // Calculate non risky assets performance
-  const nonRiskyAssetsRatesPerMonth = getNonRiskyAssetsRates(investmentDurationMonths) 
-  const nonRiskyAssetsMonthlyPayment = monthlyPayment * investerProfile.nonRisky
-  const nonRiskyAssets = calculateStocksValue(nonRiskyAssetsMonthlyPayment, investmentDurationMonths, paymentsDurationMonths, nonRiskyAssetsRatesPerMonth)
+  const nonRiskyAssetsRatesPerMonth = getNonRiskyAssetsRatesPerMonth(investmentDuration) 
+  const nonRiskyAssetsPayment = payment * investerProfile.nonRisky
+  const nonRiskyAssets = calculateStocksValue(nonRiskyAssetsPayment, investmentDuration, paymentsDurationMonths, nonRiskyAssetsRatesPerMonth, frequency)
   const nonRiskyAssetsPerformance = calculateStocksPerformance(nonRiskyAssets.total, investerProfile.nonRisky, investedAmount);
 
   const fee = riskyAssets.fee + nonRiskyAssets.fee
-  console.log(fee)
   const total = investedAmount + nonRiskyAssetsPerformance + riskyAssetsPerformance - fee; 
   
   const gainRatio = calculateGainRatio(total, effectivePaymentsTotal.effectivePayment)
+
+  console.log("gain ratio", gainRatio.toFixed(2))
+  console.log("fee", fee.toFixed(2))
 
   const labels = ["Versements", "Performance", "Total"]
   const ctx = document.getElementById("performance-chart").getContext("2d");
@@ -588,15 +591,30 @@ const getInvestmentDuration = (age, retirementAge) => Math.min(retirementAge - a
 
 const calculateTaxGainRate = (tmi, tis) => (100 - tmi + tis) / 100;
 
-const calculateEffectivePayments = (age, retirementAge, paymentsDuration, monthlyAmount, tmi, tis) => {
+const calculateEffectivePayments = (age, retirementAge, paymentsDuration, paymentAmount, frequency, tmi, tis) => {
+  const getYearlyPayment = (payment, frequency) => {
+    switch (frequency) {
+      case "monthly":
+        return payment * 12
+      case "quarterly":
+        return payment * 4
+      case "yearly":
+        return payment
+      default:
+        return payment
+    }
+  }
+
   const investmentDuration = getInvestmentDuration(age, retirementAge);
   const taxGainRate = calculateTaxGainRate(tmi, tis);
   const effectivePayments = [];
 
+  const yearlyPaymentAmount = getYearlyPayment(paymentAmount, frequency)
+
   for (let i = 0; i < investmentDuration; i++) {
     const year = i + 1;
     if (year > paymentsDuration) break;
-    const payment = monthlyAmount * 12 * year;
+    const payment = yearlyPaymentAmount * year;
     const effectivePayment = payment * taxGainRate;
     const taxGain = payment - effectivePayment;
     const yearlyPayment = { effectivePayment, taxGain };
@@ -605,23 +623,54 @@ const calculateEffectivePayments = (age, retirementAge, paymentsDuration, monthl
   return effectivePayments;
 };
 
-const calculateStocksValue = (monthlyPayment, investmentDuration, paymentsDuration, rates) => {
+const calculateStocksValue = (payment, investmentDuration, paymentsDuration, rates, frequency) => {
+  const isPaymentDate = (month, frequency) => {
+    switch (frequency) {
+      case "monthly":
+        return month % 1 === 0
+      case "quarterly":
+        return month % 3 === 0
+      case "yearly":
+        return month % 12 === 0
+      default:
+        return false
+    }
+  }
+
+  const calculateFeeRate = (frequency) => {
+    const fee = 0.012
+    switch (frequency) {
+      case "monthly":
+        return 1 - (fee / 12);
+      case "quarterly":
+        return 1 - (fee / 4);
+      case "yearly":
+        return 1 - fee;
+      default:
+        return 1 - fee;
+    }
+  }
+
   let totalStocksValue = 0;
-  const feesRate = 1 - (0.012 / 12);
+
+  const feeRate = calculateFeeRate(frequency);
   let totalStocksValueWithFees = 0;
 
   for (let i = 0; i < investmentDuration; i++) {
-    const currentRate = rates[i];
-    const currentValue = monthlyPayment / currentRate;
+    if (!isPaymentDate(i, frequency)) {
+      continue
+    }
     if (i < paymentsDuration) {
+      const currentRate = rates[i];
+      const currentValue = payment / currentRate;
       totalStocksValue += currentValue;
-      totalStocksValueWithFees = (totalStocksValueWithFees + currentValue) * feesRate;
+      totalStocksValueWithFees = (totalStocksValueWithFees + currentValue) * feeRate;
     } else {
-      totalStocksValueWithFees = totalStocksValueWithFees * feesRate;
+      totalStocksValueWithFees = totalStocksValueWithFees * feeRate;
     }
   } 
   const lastRate = rates[investmentDuration - 1];
-  
+
   const total = totalStocksValue * lastRate;
   const totalWithFee = totalStocksValueWithFees * lastRate;
 
@@ -651,10 +700,10 @@ const handleSimulateTaxGain = () => {
   const tmi = parseInt(getValueById("tmi"));
   const tis = parseInt(getValueById("tis"));
   const paymentsDuration = parseInt(getValueById("payments-duration"));
-  const frequency = parseInt(getCheckedValue("frequency"));
-  const monthlyAmount = parseInt(getValueById("payment-amount")) / frequency;
+  const payment = parseInt(getValueById("payment-amount"));
+  const frequency = getCheckedValue("frequency");
 
-  generateTaxGainChart(age, retirementAge, paymentsDuration, monthlyAmount, tmi, tis);
+  generateTaxGainChart(age, retirementAge, paymentsDuration, payment, frequency, tmi, tis);
 };
 
 const handleSimulatePerformance = () => {
@@ -663,11 +712,11 @@ const handleSimulatePerformance = () => {
   const tmi = parseInt(getValueById("tmi"));
   const tis = parseInt(getValueById("tis"));
   const paymentsDuration = parseInt(getValueById("payments-duration"));
-  const frequency = parseInt(getCheckedValue("frequency"));
-  const monthlyAmount = parseInt(getValueById("payment-amount")) / frequency;
+  const frequency = getCheckedValue("frequency");
+  const payment = parseInt(getValueById("payment-amount"));
   const profile = getCheckedValue("profile");
 
-  generatePerformanceChart(age, retirementAge, paymentsDuration, monthlyAmount, tmi, tis, profile);
+  generatePerformanceChart(age, retirementAge, paymentsDuration, payment, frequency, tmi, tis, profile);
 };
 
 const displayCharts = () => {
