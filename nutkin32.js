@@ -841,7 +841,7 @@ const generatePerformanceChart = (age, retirementAge, paymentsDuration, payment,
   const gainRatio = calculateGainRatio(total, effectivePaymentsTotal.effectivePayment)
   const performance = ((gainRatio - 1) * 100);
 
-  document.getElementById("guaranteed_perf").innerText = `+ ${performance.toFixed(2)} %`;
+  document.getElementById("guaranteed_perf").innerText = `+ ${performance} %`;
   document.getElementById("guaranteed_multiple").innerText = `${gainRatio}`;
 
   const labels = ["Versements", "Performance", "Total"]
