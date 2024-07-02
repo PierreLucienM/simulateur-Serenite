@@ -1295,7 +1295,6 @@ const setCoefListeners = () => {
     };
 
     const performance = ((coef - 1) * 100);
-    console.log(performance)
 
     document.getElementById("guaranteed_perf").innerText = `+ ${Math.round(performance)} %`;
     document.getElementById("guaranteed_multiple").innerText = `${coef}`;  
