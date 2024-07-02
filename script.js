@@ -838,11 +838,11 @@ const generatePerformanceChart = (age, retirementAge, paymentsDuration, payment,
   const fee = riskyAssets.fee + nonRiskyAssets.fee
   const total = investedAmount + nonRiskyAssetsPerformance + riskyAssetsPerformance - fee; 
   
-  const gainRatio = calculateGainRatio(total, effectivePaymentsTotal.effectivePayment)
-  const performance = ((gainRatio - 1) * 100);
+  // const gainRatio = calculateGainRatio(total, effectivePaymentsTotal.effectivePayment)
+  // const performance = ((gainRatio - 1) * 100);
 
-  document.getElementById("guaranteed_perf").innerText = `+ ${parseInt(performance)} %`;
-  document.getElementById("guaranteed_multiple").innerText = `${gainRatio}`;
+  // document.getElementById("guaranteed_perf").innerText = `+ ${parseInt(performance)} %`;
+  // document.getElementById("guaranteed_multiple").innerText = `${gainRatio}`;
 
   const labels = ["Versements", "Performance", "Total"]
   const ctx = document.getElementById("performance-chart").getContext("2d");
@@ -1234,4 +1234,46 @@ document.addEventListener('DOMContentLoaded', function () {
   setRadioLabelListeners();
   setDisplayButtonListeners();
   setMaxDurationListeners();
+  setCoefListeners();
 }); 
+
+const setCoefListeners = () => {
+  const ageInput = document.getElementById('age');
+  const retirementAgeInput = document.getElementById('retirement-age');
+  const tmiField = document.getElementById('tmi');
+  const tisField = document.getElementById('tis');
+
+  tmiField.addEventListener('input', updateCoef);
+  tisField.addEventListener('input', updateCoef);
+  ageInput.addEventListener('input', updateCoef);
+  retirementAgeInput.addEventListener('input', updateCoef);
+
+  function updateCoef() {
+    const age = parseInt(getValueById("age"));
+    const retirementAge = parseInt(getValueById("retirement-age"));
+    const tmi = parseInt(getValueById("tmi"));
+    const tis = parseInt(getValueById("tis"));
+
+    const coef = calculateCoef(age, retirementAge, tmi, tis);
+
+    if (!coef) {
+      return;
+    };
+
+    const performance = ((coef - 1) * 100);
+    console.log(performance)
+
+    document.getElementById("guaranteed_perf").innerText = `+ ${Math.round(performance)} %`;
+    document.getElementById("guaranteed_multiple").innerText = `${coef}`;  
+  }
+}
+
+const calculateCoef = (age, retirementAge, tmi, tis) => {
+  if (!age || !retirementAge || !tmi || !tis) {
+    return;
+  }
+  
+  const duration = Math.min(retirementAge - age, 30);
+  const rate = yearlyRates[duration - 1];
+  return parseFloat(((1 / rate) * (1 - tis/100) / (1 - tmi/100)).toFixed(2));
+}
