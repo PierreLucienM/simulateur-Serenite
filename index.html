@@ -9,8 +9,8 @@
 
 <body>
   <div style="display: flex; flex-direction: column; max-width: 500px; gap: 4px">
-    <div id="guaranteed_multiple">+200%</div>
-    <div id="guaranteed_perf">1,5 x</div>
+    <div id="guaranteed_multiple">+0%</div>
+    <div id="guaranteed_perf">1 x</div>
     <div style="display: flex; flex-direction: column;">
       <label for="age">Age</label>
       <input type="number" id="age" value="45">
@@ -67,151 +67,719 @@
     </div>
     <button id="simulate-button">Simulate</button>
     <canvas id="tax-gain-chart" width="400" height="200"></canvas>
-    <!-- <div id="gain-ratio-container">
-      <div id="gain-ratio"></div>
-    </div> -->
     <canvas id="performance-chart" width="400" height="200"></canvas>
+    <div id="world-standard-container">
+      <div class="world-standard" data-value="2.22"></div> 
+      <div class="world-standard" data-value="2.49"></div> 
+      <div class="world-standard" data-value="2.35"></div> 
+      <div class="world-standard" data-value="2.11"></div> 
+      <div class="world-standard" data-value="2.22"></div> 
+      <div class="world-standard" data-value="1.95"></div> 
+      <div class="world-standard" data-value="1.89"></div> 
+      <div class="world-standard" data-value="1.69"></div> 
+      <div class="world-standard" data-value="1.98"></div> 
+      <div class="world-standard" data-value="1.79"></div> 
+      <div class="world-standard" data-value="1.88"></div> 
+      <div class="world-standard" data-value="1.96"></div> 
+      <div class="world-standard" data-value="1.72"></div> 
+      <div class="world-standard" data-value="2.06"></div> 
+      <div class="world-standard" data-value="1.90"></div> 
+      <div class="world-standard" data-value="1.79"></div> 
+      <div class="world-standard" data-value="1.57"></div> 
+      <div class="world-standard" data-value="1.64"></div> 
+      <div class="world-standard" data-value="1.80"></div> 
+      <div class="world-standard" data-value="2.12"></div> 
+      <div class="world-standard" data-value="2.06"></div> 
+      <div class="world-standard" data-value="2.27"></div> 
+      <div class="world-standard" data-value="2.72"></div> 
+      <div class="world-standard" data-value="2.50"></div> 
+      <div class="world-standard" data-value="2.24"></div> 
+      <div class="world-standard" data-value="2.65"></div> 
+      <div class="world-standard" data-value="2.78"></div> 
+      <div class="world-standard" data-value="3.05"></div> 
+      <div class="world-standard" data-value="3.42"></div> 
+      <div class="world-standard" data-value="2.94"></div> 
+      <div class="world-standard" data-value="2.97"></div> 
+      <div class="world-standard" data-value="3.29"></div> 
+      <div class="world-standard" data-value="3.73"></div> 
+      <div class="world-standard" data-value="3.49"></div> 
+      <div class="world-standard" data-value="3.81"></div> 
+      <div class="world-standard" data-value="4.12"></div> 
+      <div class="world-standard" data-value="3.56"></div> 
+      <div class="world-standard" data-value="3.26"></div> 
+      <div class="world-standard" data-value="3.34"></div> 
+      <div class="world-standard" data-value="3.35"></div> 
+      <div class="world-standard" data-value="4.01"></div> 
+      <div class="world-standard" data-value="3.83"></div> 
+      <div class="world-standard" data-value="3.68"></div> 
+      <div class="world-standard" data-value="3.70"></div> 
+      <div class="world-standard" data-value="3.50"></div> 
+      <div class="world-standard" data-value="3.35"></div> 
+      <div class="world-standard" data-value="4.07"></div> 
+      <div class="world-standard" data-value="4.77"></div> 
+      <div class="world-standard" data-value="4.75"></div> 
+      <div class="world-standard" data-value="5.39"></div> 
+      <div class="world-standard" data-value="6.11"></div> 
+      <div class="world-standard" data-value="7.01"></div> 
+      <div class="world-standard" data-value="8.02"></div> 
+      <div class="world-standard" data-value="7.65"></div> 
+      <div class="world-standard" data-value="7.50"></div> 
+      <div class="world-standard" data-value="6.62"></div> 
+      <div class="world-standard" data-value="7.14"></div> 
+      <div class="world-standard" data-value="6.79"></div> 
+      <div class="world-standard" data-value="7.46"></div> 
+      <div class="world-standard" data-value="8.61"></div> 
+      <div class="world-standard" data-value="10.11"></div> 
+      <div class="world-standard" data-value="11.83"></div> 
+      <div class="world-standard" data-value="10.83"></div> 
+      <div class="world-standard" data-value="11.36"></div> 
+      <div class="world-standard" data-value="11.17"></div> 
+      <div class="world-standard" data-value="10.95"></div> 
+      <div class="world-standard" data-value="13.07"></div> 
+      <div class="world-standard" data-value="11.44"></div> 
+      <div class="world-standard" data-value="10.86"></div> 
+      <div class="world-standard" data-value="13.01"></div> 
+      <div class="world-standard" data-value="13.50"></div> 
+      <div class="world-standard" data-value="12.25"></div> 
+      <div class="world-standard" data-value="12.10"></div> 
+      <div class="world-standard" data-value="13.75"></div> 
+      <div class="world-standard" data-value="13.44"></div> 
+      <div class="world-standard" data-value="11.67"></div> 
+      <div class="world-standard" data-value="10.26"></div> 
+      <div class="world-standard" data-value="11.77"></div> 
+      <div class="world-standard" data-value="12.77"></div> 
+      <div class="world-standard" data-value="13.34"></div> 
+      <div class="world-standard" data-value="12.36"></div> 
+      <div class="world-standard" data-value="11.34"></div> 
+      <div class="world-standard" data-value="9.96"></div> 
+      <div class="world-standard" data-value="8.86"></div> 
+      <div class="world-standard" data-value="7.80"></div> 
+      <div class="world-standard" data-value="7.87"></div> 
+      <div class="world-standard" data-value="8.20"></div> 
+      <div class="world-standard" data-value="9.74"></div> 
+      <div class="world-standard" data-value="8.57"></div> 
+      <div class="world-standard" data-value="10.37"></div> 
+      <div class="world-standard" data-value="10.97"></div> 
+      <div class="world-standard" data-value="10.66"></div> 
+      <div class="world-standard" data-value="11.07"></div> 
+      <div class="world-standard" data-value="11.62"></div> 
+      <div class="world-standard" data-value="13.51"></div> 
+      <div class="world-standard" data-value="13.96"></div> 
+      <div class="world-standard" data-value="13.98"></div> 
+      <div class="world-standard" data-value="13.33"></div> 
+      <div class="world-standard" data-value="13.27"></div> 
+      <div class="world-standard" data-value="14.81"></div> 
+      <div class="world-standard" data-value="16.30"></div> 
+      <div class="world-standard" data-value="19.15"></div> 
+      <div class="world-standard" data-value="16.80"></div> 
+      <div class="world-standard" data-value="17.07"></div> 
+      <div class="world-standard" data-value="16.26"></div> 
+      <div class="world-standard" data-value="19.48"></div> 
+      <div class="world-standard" data-value="22.16"></div> 
+      <div class="world-standard" data-value="21.74"></div> 
+      <div class="world-standard" data-value="24.56"></div> 
+      <div class="world-standard" data-value="22.37"></div> 
+      <div class="world-standard" data-value="19.71"></div> 
+      <div class="world-standard" data-value="20.76"></div> 
+      <div class="world-standard" data-value="18.14"></div> 
+      <div class="world-standard" data-value="15.61"></div> 
+      <div class="world-standard" data-value="18.87"></div> 
+      <div class="world-standard" data-value="17.45"></div> 
+      <div class="world-standard" data-value="16.00"></div> 
+      <div class="world-standard" data-value="17.78"></div> 
+      <div class="world-standard" data-value="15.56"></div> 
+      <div class="world-standard" data-value="16.96"></div> 
+      <div class="world-standard" data-value="16.11"></div> 
+      <div class="world-standard" data-value="17.76"></div> 
+      <div class="world-standard" data-value="18.09"></div> 
+      <div class="world-standard" data-value="16.87"></div> 
+      <div class="world-standard" data-value="17.73"></div> 
+      <div class="world-standard" data-value="19.09"></div> 
+      <div class="world-standard" data-value="20.34"></div> 
+      <div class="world-standard" data-value="18.28"></div> 
+      <div class="world-standard" data-value="20.59"></div> 
+      <div class="world-standard" data-value="23.14"></div> 
+      <div class="world-standard" data-value="27.13"></div> 
+      <div class="world-standard" data-value="25.23"></div> 
+      <div class="world-standard" data-value="22.20"></div> 
+      <div class="world-standard" data-value="19.25"></div> 
+      <div class="world-standard" data-value="17.64"></div> 
+      <div class="world-standard" data-value="19.48"></div> 
+      <div class="world-standard" data-value="21.76"></div> 
+      <div class="world-standard" data-value="24.89"></div> 
+      <div class="world-standard" data-value="26.71"></div> 
+      <div class="world-standard" data-value="31.02"></div> 
+      <div class="world-standard" data-value="28.67"></div> 
+      <div class="world-standard" data-value="26.11"></div> 
+      <div class="world-standard" data-value="30.64"></div> 
+      <div class="world-standard" data-value="33.68"></div> 
+      <div class="world-standard" data-value="29.93"></div> 
+      <div class="world-standard" data-value="32.59"></div> 
+      <div class="world-standard" data-value="31.18"></div> 
+      <div class="world-standard" data-value="32.93"></div> 
+      <div class="world-standard" data-value="34.51"></div> 
+      <div class="world-standard" data-value="33.87"></div> 
+      <div class="world-standard" data-value="40.14"></div> 
+      <div class="world-standard" data-value="40.95"></div> 
+      <div class="world-standard" data-value="40.33"></div> 
+      <div class="world-standard" data-value="36.56"></div> 
+      <div class="world-standard" data-value="38.22"></div> 
+      <div class="world-standard" data-value="35.10"></div> 
+      <div class="world-standard" data-value="31.97"></div> 
+      <div class="world-standard" data-value="29.67"></div> 
+      <div class="world-standard" data-value="28.76"></div> 
+      <div class="world-standard" data-value="28.11"></div> 
+      <div class="world-standard" data-value="26.68"></div> 
+      <div class="world-standard" data-value="27.36"></div> 
+      <div class="world-standard" data-value="29.95"></div> 
+      <div class="world-standard" data-value="28.26"></div> 
+      <div class="world-standard" data-value="33.45"></div> 
+      <div class="world-standard" data-value="35.39"></div> 
+      <div class="world-standard" data-value="41.25"></div> 
+      <div class="world-standard" data-value="37.81"></div> 
+      <div class="world-standard" data-value="35.95"></div> 
+      <div class="world-standard" data-value="38.96"></div> 
+      <div class="world-standard" data-value="42.18"></div> 
+      <div class="world-standard" data-value="39.59"></div> 
+      <div class="world-standard" data-value="34.07"></div> 
+      <div class="world-standard" data-value="34.79"></div> 
+      <div class="world-standard" data-value="35.09"></div> 
+      <div class="world-standard" data-value="33.24"></div> 
+      <div class="world-standard" data-value="33.58"></div> 
+      <div class="world-standard" data-value="36.24"></div> 
+      <div class="world-standard" data-value="31.56"></div> 
+      <div class="world-standard" data-value="35.04"></div> 
+      <div class="world-standard" data-value="33.74"></div> 
+      <div class="world-standard" data-value="39.84"></div> 
+      <div class="world-standard" data-value="36.54"></div> 
+      <div class="world-standard" data-value="38.31"></div> 
+      <div class="world-standard" data-value="39.52"></div> 
+      <div class="world-standard" data-value="40.97"></div> 
+      <div class="world-standard" data-value="47.55"></div> 
+      <div class="world-standard" data-value="54.34"></div> 
+      <div class="world-standard" data-value="59.73"></div> 
+      <div class="world-standard" data-value="60.55"></div> 
+      <div class="world-standard" data-value="68.69"></div> 
+      <div class="world-standard" data-value="68.40"></div> 
+      <div class="world-standard" data-value="65.82"></div> 
+      <div class="world-standard" data-value="58.96"></div> 
+      <div class="world-standard" data-value="54.32"></div> 
+      <div class="world-standard" data-value="50.08"></div> 
+      <div class="world-standard" data-value="46.16"></div> 
+      <div class="world-standard" data-value="40.33"></div> 
+      <div class="world-standard" data-value="35.61"></div> 
+      <div class="world-standard" data-value="41.91"></div> 
+      <div class="world-standard" data-value="48.07"></div> 
+      <div class="world-standard" data-value="52.24"></div> 
+      <div class="world-standard" data-value="61.74"></div> 
+      <div class="world-standard" data-value="69.43"></div> 
+      <div class="world-standard" data-value="62.05"></div> 
+      <div class="world-standard" data-value="64.43"></div> 
+      <div class="world-standard" data-value="60.89"></div> 
+      <div class="world-standard" data-value="52.79"></div> 
+      <div class="world-standard" data-value="60.81"></div> 
+      <div class="world-standard" data-value="71.97"></div> 
+      <div class="world-standard" data-value="72.15"></div> 
+      <div class="world-standard" data-value="63.09"></div> 
+      <div class="world-standard" data-value="54.96"></div> 
+      <div class="world-standard" data-value="49.40"></div> 
+      <div class="world-standard" data-value="47.01"></div> 
+      <div class="world-standard" data-value="42.94"></div> 
+      <div class="world-standard" data-value="40.54"></div> 
+      <div class="world-standard" data-value="39.01"></div> 
+      <div class="world-standard" data-value="43.50"></div> 
+      <div class="world-standard" data-value="39.52"></div> 
+      <div class="world-standard" data-value="39.03"></div> 
+      <div class="world-standard" data-value="38.35"></div> 
+      <div class="world-standard" data-value="38.47"></div> 
+      <div class="world-standard" data-value="41.08"></div> 
+      <div class="world-standard" data-value="45.62"></div> 
+      <div class="world-standard" data-value="46.05"></div> 
+      <div class="world-standard" data-value="55.81"></div> 
+      <div class="world-standard" data-value="53.40"></div> 
+      <div class="world-standard" data-value="51.26"></div> 
+      <div class="world-standard" data-value="51.60"></div> 
+      <div class="world-standard" data-value="53.62"></div> 
+      <div class="world-standard" data-value="47.56"></div> 
+      <div class="world-standard" data-value="43.06"></div> 
+      <div class="world-standard" data-value="50.75"></div> 
+      <div class="world-standard" data-value="50.21"></div> 
+      <div class="world-standard" data-value="46.92"></div> 
+      <div class="world-standard" data-value="51.62"></div> 
+      <div class="world-standard" data-value="50.16"></div> 
+      <div class="world-standard" data-value="54.41"></div> 
+      <div class="world-standard" data-value="57.22"></div> 
+      <div class="world-standard" data-value="53.26"></div> 
+      <div class="world-standard" data-value="51.55"></div> 
+      <div class="world-standard" data-value="52.23"></div> 
+      <div class="world-standard" data-value="44.90"></div> 
+      <div class="world-standard" data-value="42.83"></div> 
+      <div class="world-standard" data-value="38.99"></div> 
+      <div class="world-standard" data-value="42.65"></div> 
+      <div class="world-standard" data-value="40.99"></div> 
+      <div class="world-standard" data-value="40.88"></div> 
+      <div class="world-standard" data-value="44.89"></div> 
+      <div class="world-standard" data-value="41.13"></div> 
+      <div class="world-standard" data-value="38.59"></div> 
+      <div class="world-standard" data-value="37.81"></div> 
+      <div class="world-standard" data-value="42.14"></div> 
+      <div class="world-standard" data-value="38.27"></div> 
+      <div class="world-standard" data-value="39.82"></div> 
+      <div class="world-standard" data-value="40.48"></div> 
+      <div class="world-standard" data-value="42.22"></div> 
+      <div class="world-standard" data-value="48.39"></div> 
+      <div class="world-standard" data-value="48.81"></div> 
+      <div class="world-standard" data-value="47.97"></div> 
+      <div class="world-standard" data-value="57.73"></div> 
+      <div class="world-standard" data-value="64.05"></div> 
+      <div class="world-standard" data-value="55.86"></div> 
+      <div class="world-standard" data-value="54.95"></div> 
+      <div class="world-standard" data-value="59.99"></div> 
+      <div class="world-standard" data-value="56.19"></div> 
+      <div class="world-standard" data-value="58.20"></div> 
+      <div class="world-standard" data-value="55.32"></div> 
+      <div class="world-standard" data-value="50.36"></div> 
+      <div class="world-standard" data-value="50.92"></div> 
+      <div class="world-standard" data-value="60.44"></div> 
+      <div class="world-standard" data-value="58.13"></div> 
+      <div class="world-standard" data-value="55.75"></div> 
+      <div class="world-standard" data-value="60.24"></div> 
+      <div class="world-standard" data-value="53.27"></div> 
+      <div class="world-standard" data-value="59.37"></div> 
+      <div class="world-standard" data-value="63.24"></div> 
+      <div class="world-standard" data-value="67.09"></div> 
+      <div class="world-standard" data-value="67.23"></div> 
+      <div class="world-standard" data-value="75.49"></div> 
+      <div class="world-standard" data-value="82.30"></div> 
+      <div class="world-standard" data-value="74.06"></div> 
+      <div class="world-standard" data-value="73.90"></div> 
+      <div class="world-standard" data-value="65.56"></div> 
+      <div class="world-standard" data-value="69.25"></div> 
+      <div class="world-standard" data-value="61.75"></div> 
+      <div class="world-standard" data-value="71.99"></div> 
+      <div class="world-standard" data-value="62.25"></div> 
+      <div class="world-standard" data-value="72.59"></div> 
+      <div class="world-standard" data-value="64.56"></div> 
+      <div class="world-standard" data-value="75.96"></div> 
+      <div class="world-standard" data-value="87.83"></div> 
+      <div class="world-standard" data-value="76.71"></div> 
+      <div class="world-standard" data-value="65.76"></div> 
+      <div class="world-standard" data-value="56.48"></div> 
+      <div class="world-standard" data-value="51.44"></div> 
+      <div class="world-standard" data-value="62.11"></div> 
+      <div class="world-standard" data-value="74.15"></div> 
+      <div class="world-standard" data-value="76.57"></div> 
+      <div class="world-standard" data-value="67.78"></div> 
+      <div class="world-standard" data-value="79.67"></div> 
+      <div class="world-standard" data-value="92.20"></div> 
+      <div class="world-standard" data-value="81.37"></div> 
+      <div class="world-standard" data-value="81.24"></div> 
+      <div class="world-standard" data-value="83.13"></div> 
+      <div class="world-standard" data-value="75.35"></div> 
+      <div class="world-standard" data-value="64.54"></div> 
+      <div class="world-standard" data-value="65.66"></div> 
+      <div class="world-standard" data-value="56.91"></div> 
+      <div class="world-standard" data-value="60.70"></div> 
+      <div class="world-standard" data-value="63.70"></div> 
+      <div class="world-standard" data-value="73.23"></div> 
+      <div class="world-standard" data-value="88.66"></div> 
+      <div class="world-standard" data-value="105.14"></div> 
+      <div class="world-standard" data-value="91.98"></div> 
+      <div class="world-standard" data-value="101.23"></div> 
+      <div class="world-standard" data-value="106.44"></div> 
+      <div class="world-standard" data-value="97.31"></div> 
+      <div class="world-standard" data-value="91.23"></div> 
+      <div class="world-standard" data-value="87.17"></div> 
+      <div class="world-standard" data-value="104.64"></div> 
+      <div class="world-standard" data-value="95.73"></div> 
+      <div class="world-standard" data-value="110.49"></div> 
+      <div class="world-standard" data-value="101.06"></div> 
+      <div class="world-standard" data-value="100.65"></div> 
+      <div class="world-standard" data-value="101.89"></div> 
+      <div class="world-standard" data-value="92.10"></div> 
+      <div class="world-standard" data-value="98.17"></div> 
+      <div class="world-standard" data-value="95.07"></div> 
+      <div class="world-standard" data-value="100.45"></div> 
+      <div class="world-standard" data-value="118.80"></div> 
+      <div class="world-standard" data-value="103.32"></div> 
+      <div class="world-standard" data-value="120.62"></div> 
+      <div class="world-standard" data-value="108.35"></div> 
+      <div class="world-standard" data-value="100.84"></div> 
+      <div class="world-standard" data-value="117.77"></div> 
+      <div class="world-standard" data-value="127.68"></div> 
+      <div class="world-standard" data-value="113.43"></div> 
+      <div class="world-standard" data-value="118.73"></div> 
+      <div class="world-standard" data-value="135.78"></div> 
+      <div class="world-standard" data-value="117.17"></div> 
+      <div class="world-standard" data-value="114.22"></div> 
+      <div class="world-standard" data-value="102.56"></div> 
+      <div class="world-standard" data-value="93.40"></div> 
+      <div class="world-standard" data-value="97.53"></div> 
+      <div class="world-standard" data-value="114.02"></div> 
+      <div class="world-standard" data-value="113.28"></div> 
+      <div class="world-standard" data-value="115.18"></div> 
+      <div class="world-standard" data-value="117.82"></div> 
+      <div class="world-standard" data-value="108.92"></div> 
+      <div class="world-standard" data-value="113.65"></div> 
+      <div class="world-standard" data-value="105.68"></div> 
+      <div class="world-standard" data-value="99.24"></div> 
+      <div class="world-standard" data-value="97.33"></div> 
+      <div class="world-standard" data-value="115.23"></div> 
+      <div class="world-standard" data-value="112.57"></div> 
+      <div class="world-standard" data-value="103.44"></div> 
+      <div class="world-standard" data-value="95.39"></div> 
+      <div class="world-standard" data-value="94.23"></div> 
+      <div class="world-standard" data-value="85.11"></div> 
+      <div class="world-standard" data-value="82.51"></div> 
+      <div class="world-standard" data-value="83.74"></div> 
+      <div class="world-standard" data-value="75.19"></div> 
+      <div class="world-standard" data-value="77.18"></div> 
+      <div class="world-standard" data-value="89.74"></div> 
+      <div class="world-standard" data-value="83.53"></div> 
+      <div class="world-standard" data-value="92.95"></div> 
+      <div class="world-standard" data-value="107.81"></div> 
+      <div class="world-standard" data-value="99.99"></div> 
+      <div class="world-standard" data-value="95.16"></div> 
+      <div class="world-standard" data-value="104.87"></div> 
+      <div class="world-standard" data-value="103.45"></div> 
+      <div class="world-standard" data-value="101.54"></div> 
+      <div class="world-standard" data-value="100.00"></div> 
+      <div class="world-standard" data-value="105.65"></div> 
+      <div class="world-standard" data-value="106.37"></div> 
+      <div class="world-standard" data-value="112.65"></div> 
+      <div class="world-standard" data-value="119.47"></div> 
+      <div class="world-standard" data-value="116.75"></div> 
+      <div class="world-standard" data-value="123.56"></div> 
+      <div class="world-standard" data-value="118.68"></div> 
+      <div class="world-standard" data-value="120.03"></div> 
+      <div class="world-standard" data-value="117.87"></div> 
+      <div class="world-standard" data-value="125.62"></div> 
+      <div class="world-standard" data-value="134.81"></div> 
+      <div class="world-standard" data-value="146.36"></div> 
+      <div class="world-standard" data-value="141.35"></div> 
+      <div class="world-standard" data-value="144.01"></div> 
+      <div class="world-standard" data-value="154.88"></div> 
+      <div class="world-standard" data-value="155.75"></div> 
+      <div class="world-standard" data-value="149.14"></div> 
+      <div class="world-standard" data-value="149.14"></div> 
+      <div class="world-standard" data-value="149.92"></div> 
+      <div class="world-standard" data-value="161.31"></div> 
+      <div class="world-standard" data-value="153.86"></div> 
+      <div class="world-standard" data-value="157.48"></div> 
+      <div class="world-standard" data-value="144.01"></div> 
+      <div class="world-standard" data-value="135.67"></div> 
+      <div class="world-standard" data-value="139.60"></div> 
+      <div class="world-standard" data-value="129.23"></div> 
+      <div class="world-standard" data-value="125.58"></div> 
+      <div class="world-standard" data-value="134.45"></div> 
+      <div class="world-standard" data-value="138.80"></div> 
+      <div class="world-standard" data-value="134.59"></div> 
+      <div class="world-standard" data-value="128.48"></div> 
+      <div class="world-standard" data-value="117.80"></div> 
+      <div class="world-standard" data-value="107.13"></div> 
+      <div class="world-standard" data-value="110.39"></div> 
+      <div class="world-standard" data-value="117.60"></div> 
+      <div class="world-standard" data-value="118.98"></div> 
+      <div class="world-standard" data-value="119.32"></div> 
+      <div class="world-standard" data-value="117.71"></div> 
+      <div class="world-standard" data-value="121.85"></div> 
+      <div class="world-standard" data-value="113.96"></div> 
+      <div class="world-standard" data-value="110.10"></div> 
+      <div class="world-standard" data-value="97.82"></div> 
+      <div class="world-standard" data-value="90.22"></div> 
+      <div class="world-standard" data-value="90.35"></div> 
+      <div class="world-standard" data-value="79.79"></div> 
+      <div class="world-standard" data-value="85.49"></div> 
+      <div class="world-standard" data-value="89.68"></div> 
+      <div class="world-standard" data-value="80.88"></div> 
+      <div class="world-standard" data-value="76.65"></div> 
+      <div class="world-standard" data-value="75.01"></div> 
+      <div class="world-standard" data-value="73.85"></div> 
+      <div class="world-standard" data-value="78.60"></div> 
+      <div class="world-standard" data-value="78.83"></div> 
+      <div class="world-standard" data-value="82.13"></div> 
+      <div class="world-standard" data-value="85.48"></div> 
+      <div class="world-standard" data-value="89.52"></div> 
+      <div class="world-standard" data-value="84.90"></div> 
+      <div class="world-standard" data-value="90.09"></div> 
+      <div class="world-standard" data-value="88.69"></div> 
+      <div class="world-standard" data-value="89.57"></div> 
+      <div class="world-standard" data-value="92.40"></div> 
+      <div class="world-standard" data-value="93.93"></div> 
+      <div class="world-standard" data-value="94.34"></div> 
+      <div class="world-standard" data-value="94.73"></div> 
+      <div class="world-standard" data-value="93.84"></div> 
+      <div class="world-standard" data-value="96.12"></div> 
+      <div class="world-standard" data-value="93.97"></div> 
+      <div class="world-standard" data-value="93.50"></div> 
+      <div class="world-standard" data-value="93.22"></div> 
+      <div class="world-standard" data-value="93.24"></div> 
+      <div class="world-standard" data-value="93.93"></div> 
+      <div class="world-standard" data-value="95.35"></div> 
+      <div class="world-standard" data-value="97.19"></div> 
+      <div class="world-standard" data-value="98.47"></div> 
+      <div class="world-standard" data-value="98.61"></div> 
+      <div class="world-standard" data-value="97.12"></div> 
+      <div class="world-standard" data-value="103.34"></div> 
+      <div class="world-standard" data-value="106.31"></div> 
+      <div class="world-standard" data-value="109.66"></div> 
+      <div class="world-standard" data-value="109.12"></div> 
+      <div class="world-standard" data-value="114.20"></div> 
+      <div class="world-standard" data-value="112.17"></div> 
+      <div class="world-standard" data-value="117.75"></div> 
+      <div class="world-standard" data-value="120.30"></div> 
+      <div class="world-standard" data-value="122.07"></div> 
+      <div class="world-standard" data-value="124.15"></div> 
+      <div class="world-standard" data-value="125.00"></div> 
+      <div class="world-standard" data-value="123.73"></div> 
+      <div class="world-standard" data-value="117.20"></div> 
+      <div class="world-standard" data-value="117.70"></div> 
+      <div class="world-standard" data-value="118.66"></div> 
+      <div class="world-standard" data-value="121.37"></div> 
+      <div class="world-standard" data-value="124.11"></div> 
+      <div class="world-standard" data-value="127.70"></div> 
+      <div class="world-standard" data-value="125.97"></div> 
+      <div class="world-standard" data-value="129.20"></div> 
+      <div class="world-standard" data-value="132.66"></div> 
+      <div class="world-standard" data-value="129.82"></div> 
+      <div class="world-standard" data-value="131.18"></div> 
+      <div class="world-standard" data-value="133.60"></div> 
+      <div class="world-standard" data-value="139.29"></div> 
+      <div class="world-standard" data-value="137.71"></div> 
+      <div class="world-standard" data-value="132.86"></div> 
+      <div class="world-standard" data-value="133.31"></div> 
+      <div class="world-standard" data-value="133.86"></div> 
+      <div class="world-standard" data-value="135.62"></div> 
+      <div class="world-standard" data-value="128.21"></div> 
+      <div class="world-standard" data-value="127.06"></div> 
+      <div class="world-standard" data-value="115.88"></div> 
+      <div class="world-standard" data-value="112.36"></div> 
+      <div class="world-standard" data-value="106.62"></div> 
+      <div class="world-standard" data-value="114.22"></div> 
+      <div class="world-standard" data-value="116.17"></div> 
+      <div class="world-standard" data-value="105.45"></div> 
+      <div class="world-standard" data-value="103.88"></div> 
+      <div class="world-standard" data-value="108.54"></div> 
+      <div class="world-standard" data-value="100.23"></div> 
+      <div class="world-standard" data-value="89.98"></div> 
+      <div class="world-standard" data-value="84.10"></div> 
+      <div class="world-standard" data-value="79.23"></div> 
+      <div class="world-standard" data-value="78.41"></div> 
+      <div class="world-standard" data-value="71.02"></div> 
+      <div class="world-standard" data-value="73.06"></div> 
+      <div class="world-standard" data-value="81.42"></div> 
+      <div class="world-standard" data-value="83.13"></div> 
+      <div class="world-standard" data-value="83.51"></div> 
+      <div class="world-standard" data-value="89.61"></div> 
+      <div class="world-standard" data-value="92.19"></div> 
+      <div class="world-standard" data-value="94.11"></div> 
+      <div class="world-standard" data-value="91.58"></div> 
+      <div class="world-standard" data-value="93.67"></div> 
+      <div class="world-standard" data-value="99.78"></div> 
+      <div class="world-standard" data-value="98.74"></div> 
+      <div class="world-standard" data-value="101.99"></div> 
+      <div class="world-standard" data-value="109.23"></div> 
+      <div class="world-standard" data-value="111.17"></div> 
+      <div class="world-standard" data-value="108.93"></div> 
+      <div class="world-standard" data-value="105.38"></div> 
+      <div class="world-standard" data-value="107.11"></div> 
+      <div class="world-standard" data-value="105.70"></div> 
+      <div class="world-standard" data-value="107.57"></div> 
+      <div class="world-standard" data-value="109.60"></div> 
+      <div class="world-standard" data-value="114.50"></div> 
+      <div class="world-standard" data-value="119.27"></div> 
+      <div class="world-standard" data-value="119.34"></div> 
+      <div class="world-standard" data-value="122.61"></div> 
+      <div class="world-standard" data-value="118.16"></div> 
+      <div class="world-standard" data-value="117.82"></div> 
+      <div class="world-standard" data-value="119.07"></div> 
+      <div class="world-standard" data-value="116.20"></div> 
+      <div class="world-standard" data-value="115.11"></div> 
+      <div class="world-standard" data-value="106.79"></div> 
+      <div class="world-standard" data-value="104.70"></div> 
+      <div class="world-standard" data-value="111.13"></div> 
+      <div class="world-standard" data-value="112.34"></div> 
+      <div class="world-standard" data-value="116.43"></div> 
+      <div class="world-standard" data-value="121.25"></div> 
+      <div class="world-standard" data-value="124.45"></div> 
+      <div class="world-standard" data-value="126.62"></div> 
+      <div class="world-standard" data-value="125.95"></div> 
+      <div class="world-standard" data-value="123.19"></div> 
+      <div class="world-standard" data-value="126.14"></div> 
+      <div class="world-standard" data-value="131.65"></div> 
+      <div class="world-standard" data-value="131.89"></div> 
+      <div class="world-standard" data-value="132.77"></div> 
+      <div class="world-standard" data-value="130.93"></div> 
+      <div class="world-standard" data-value="132.11"></div> 
+      <div class="world-standard" data-value="132.78"></div> 
+      <div class="world-standard" data-value="135.54"></div> 
+      <div class="world-standard" data-value="140.96"></div> 
+      <div class="world-standard" data-value="146.87"></div> 
+      <div class="world-standard" data-value="147.55"></div> 
+      <div class="world-standard" data-value="150.16"></div> 
+      <div class="world-standard" data-value="146.03"></div> 
+      <div class="world-standard" data-value="150.47"></div> 
+      <div class="world-standard" data-value="148.30"></div> 
+      <div class="world-standard" data-value="151.69"></div> 
+      <div class="world-standard" data-value="156.95"></div> 
+      <div class="world-standard" data-value="159.50"></div> 
+      <div class="world-standard" data-value="160.93"></div> 
+      <div class="world-standard" data-value="158.35"></div> 
+      <div class="world-standard" data-value="162.35"></div> 
+      <div class="world-standard" data-value="162.93"></div> 
+      <div class="world-standard" data-value="163.62"></div> 
+      <div class="world-standard" data-value="169.52"></div> 
+      <div class="world-standard" data-value="171.98"></div> 
+      <div class="world-standard" data-value="173.17"></div> 
+      <div class="world-standard" data-value="179.78"></div> 
+      <div class="world-standard" data-value="182.37"></div> 
+      <div class="world-standard" data-value="185.07"></div> 
+      <div class="world-standard" data-value="189.72"></div> 
+      <div class="world-standard" data-value="192.31"></div> 
+      <div class="world-standard" data-value="202.48"></div> 
+      <div class="world-standard" data-value="215.64"></div> 
+      <div class="world-standard" data-value="221.69"></div> 
+      <div class="world-standard" data-value="217.46"></div> 
+      <div class="world-standard" data-value="223.03"></div> 
+      <div class="world-standard" data-value="214.35"></div> 
+      <div class="world-standard" data-value="220.04"></div> 
+      <div class="world-standard" data-value="202.61"></div> 
+      <div class="world-standard" data-value="195.88"></div> 
+      <div class="world-standard" data-value="213.62"></div> 
+      <div class="world-standard" data-value="222.32"></div> 
+      <div class="world-standard" data-value="212.35"></div> 
+      <div class="world-standard" data-value="200.43"></div> 
+      <div class="world-standard" data-value="198.12"></div> 
+      <div class="world-standard" data-value="201.72"></div> 
+      <div class="world-standard" data-value="203.88"></div> 
+      <div class="world-standard" data-value="210.93"></div> 
+      <div class="world-standard" data-value="209.00"></div> 
+      <div class="world-standard" data-value="216.41"></div> 
+      <div class="world-standard" data-value="217.46"></div> 
+      <div class="world-standard" data-value="216.66"></div> 
+      <div class="world-standard" data-value="217.82"></div> 
+      <div class="world-standard" data-value="228.33"></div> 
+      <div class="world-standard" data-value="235.13"></div> 
+      <div class="world-standard" data-value="235.02"></div> 
+      <div class="world-standard" data-value="245.66"></div> 
+      <div class="world-standard" data-value="246.66"></div> 
+      <div class="world-standard" data-value="245.85"></div> 
+      <div class="world-standard" data-value="243.12"></div> 
+      <div class="world-standard" data-value="240.62"></div> 
+      <div class="world-standard" data-value="238.34"></div> 
+      <div class="world-standard" data-value="236.69"></div> 
+      <div class="world-standard" data-value="243.38"></div> 
+      <div class="world-standard" data-value="251.65"></div> 
+      <div class="world-standard" data-value="251.19"></div> 
+      <div class="world-standard" data-value="252.80"></div> 
+      <div class="world-standard" data-value="256.54"></div> 
+      <div class="world-standard" data-value="251.18"></div> 
+      <div class="world-standard" data-value="243.66"></div> 
+      <div class="world-standard" data-value="250.88"></div> 
+      <div class="world-standard" data-value="261.30"></div> 
+      <div class="world-standard" data-value="261.12"></div> 
+      <div class="world-standard" data-value="268.70"></div> 
+      <div class="world-standard" data-value="273.55"></div> 
+      <div class="world-standard" data-value="275.55"></div> 
+      <div class="world-standard" data-value="261.73"></div> 
+      <div class="world-standard" data-value="264.89"></div> 
+      <div class="world-standard" data-value="242.41"></div> 
+      <div class="world-standard" data-value="260.29"></div> 
+      <div class="world-standard" data-value="270.18"></div> 
+      <div class="world-standard" data-value="277.59"></div> 
+      <div class="world-standard" data-value="287.99"></div> 
+      <div class="world-standard" data-value="272.92"></div> 
+      <div class="world-standard" data-value="284.66"></div> 
+      <div class="world-standard" data-value="292.59"></div> 
+      <div class="world-standard" data-value="289.77"></div> 
+      <div class="world-standard" data-value="298.94"></div> 
+      <div class="world-standard" data-value="299.55"></div> 
+      <div class="world-standard" data-value="311.54"></div> 
+      <div class="world-standard" data-value="315.18"></div> 
+      <div class="world-standard" data-value="317.31"></div> 
+      <div class="world-standard" data-value="293.06"></div> 
+      <div class="world-standard" data-value="254.56"></div> 
+      <div class="world-standard" data-value="282.87"></div> 
+      <div class="world-standard" data-value="291.99"></div> 
+      <div class="world-standard" data-value="296.83"></div> 
+      <div class="world-standard" data-value="295.42"></div> 
+      <div class="world-standard" data-value="311.61"></div> 
+      <div class="world-standard" data-value="306.84"></div> 
+      <div class="world-standard" data-value="299.42"></div> 
+      <div class="world-standard" data-value="328.85"></div> 
+      <div class="world-standard" data-value="335.13"></div> 
+      <div class="world-standard" data-value="334.17"></div> 
+      <div class="world-standard" data-value="343.04"></div> 
+      <div class="world-standard" data-value="366.06"></div> 
+      <div class="world-standard" data-value="374.03"></div> 
+      <div class="world-standard" data-value="373.57"></div> 
+      <div class="world-standard" data-value="390.89"></div> 
+      <div class="world-standard" data-value="397.92"></div> 
+      <div class="world-standard" data-value="409.67"></div> 
+      <div class="world-standard" data-value="399.95"></div> 
+      <div class="world-standard" data-value="423.22"></div> 
+      <div class="world-standard" data-value="425.59"></div> 
+      <div class="world-standard" data-value="439.25"></div> 
+      <div class="world-standard" data-value="422.02"></div> 
+      <div class="world-standard" data-value="410.54"></div> 
+      <div class="world-standard" data-value="425.81"></div> 
+      <div class="world-standard" data-value="411.79"></div> 
+      <div class="world-standard" data-value="405.83"></div> 
+      <div class="world-standard" data-value="379.82"></div> 
+      <div class="world-standard" data-value="420.35"></div> 
+      <div class="world-standard" data-value="408.43"></div> 
+      <div class="world-standard" data-value="380.25"></div> 
+      <div class="world-standard" data-value="403.97"></div> 
+      <div class="world-standard" data-value="414.73"></div> 
+      <div class="world-standard" data-value="383.13"></div> 
+      <div class="world-standard" data-value="403.14"></div> 
+      <div class="world-standard" data-value="402.92"></div> 
+      <div class="world-standard" data-value="405.45"></div> 
+      <div class="world-standard" data-value="406.00"></div> 
+      <div class="world-standard" data-value="416.24"></div> 
+      <div class="world-standard" data-value="431.34"></div> 
+      <div class="world-standard" data-value="441.16"></div> 
+      <div class="world-standard" data-value="437.44"></div> 
+      <div class="world-standard" data-value="429.09"></div> 
+      <div class="world-standard" data-value="417.33"></div> 
+      <div class="world-standard" data-value="442.19"></div> 
+      <div class="world-standard" data-value="458.21"></div>
+    </div>
+    <div id="yearly-rates-container">
+      <div class="yearly-rate" data-value="1"></div>
+      <div class="yearly-rate" data-value="0.9865"></div>
+      <div class="yearly-rate" data-value="0.9608"></div>
+      <div class="yearly-rate" data-value="0.9354"></div>
+      <div class="yearly-rate" data-value="0.9104"></div>
+      <div class="yearly-rate" data-value="0.8866"></div>
+      <div class="yearly-rate" data-value="0.8621"></div>
+      <div class="yearly-rate" data-value="0.8399"></div>
+      <div class="yearly-rate" data-value="0.8169"></div>
+      <div class="yearly-rate" data-value="0.7952"></div>
+      <div class="yearly-rate" data-value="0.7728"></div>
+      <div class="yearly-rate" data-value="0.7516"></div>
+      <div class="yearly-rate" data-value="0.7307"></div>
+      <div class="yearly-rate" data-value="0.71"></div>
+      <div class="yearly-rate" data-value="0.6905"></div>
+      <div class="yearly-rate" data-value="0.6721"></div>
+      <div class="yearly-rate" data-value="0.654"></div>
+      <div class="yearly-rate" data-value="0.6387"></div>
+      <div class="yearly-rate" data-value="0.6237"></div>
+      <div class="yearly-rate" data-value="0.6105"></div>
+      <div class="yearly-rate" data-value="0.5976"></div>
+      <div class="yearly-rate" data-value="0.5864"></div>
+      <div class="yearly-rate" data-value="0.5763"></div>
+      <div class="yearly-rate" data-value="0.5663"></div>
+      <div class="yearly-rate" data-value="0.5573"></div>
+      <div class="yearly-rate" data-value="0.5483"></div>
+      <div class="yearly-rate" data-value="0.5403"></div>
+      <div class="yearly-rate" data-value="0.5333"></div>
+      <div class="yearly-rate" data-value="0.5262"></div>
+      <div class="yearly-rate" data-value="0.5201"></div>
+      <div class="yearly-rate" data-value="0.5132"></div>
+    </div>
   </div>
-
-  <script type="text/javascript" src="script.js"></script>
+  <script type="text/javascript" src="script-02-07-2024-4.js"></script>
 </body>
 
 </html>
-
-<!-- <script>
-  $(document).ready(function () {
-    $('.radio').click(function() {
-    	$selected = $(this);
-      $selected.closest(".radio-button_wrapper").find(".radio").removeClass("selected");
-      $selected.addClass("selected");
-    });
-    
-    $("input[type=range]").on("input", function () {
-      const $slider = $(this);
-      const min = Number($slider.attr("min"));
-      const ratio = ((Number($slider.val()) - min) / (Number($slider.attr("max")) - min)) * 100;
-      const gradient = `linear-gradient(to right, #04463a ${ratio}%, #ccc ${ratio}%`;
-      $slider.css("background", gradient);
-    })
-    $("input[type=range]").trigger("input");
-    
-    $.fn.updateInvestement = function () {
-      const $simulator = $(this);
-      const grossIncome = Number($simulator.find('input[name=gross_income]').val());
-      const isSingle = $simulator.find('input[name=is_single]:checked').val() === 'true';
-      const isEmployee = $simulator.find('input[name=is_employee]:checked').val() === 'true';
-      const partner = $simulator.getPartnerInformations(isSingle, $simulator);
-
-      // Investment maximum capacity
-      const paymentMaxCapacity = getPaymentMaxCapacity({ grossIncome, isEmployee }, partner);
-      $simulator.find('#max_investment_capacity').text(`${addSpaces(Math.round(paymentMaxCapacity))} €`);
-
-      const $targetInvestment = $simulator.find('input[name=investment]');
-      $targetInvestment.val(Math.round(paymentMaxCapacity));
-      $targetInvestment.attr('max', Math.round(paymentMaxCapacity));
-      $targetInvestment.trigger('input');
-    };
-
-    $.fn.getPartnerInformations = function (isSingle) {
-      const $simulator = $(this);
-      return isSingle
-        ? undefined
-      : {
-        isEmployee: $simulator.find('input[name=partner_is_employee]:checked').val() === 'true',
-        grossIncome: $simulator.find('input[name=partner_gross_income]').val(),
-      };
-    };
-    
-    // 1st & 2nd Simulators – Single, Income, Employee status and Partner’s inputs
-    $(
-      [
-        '.card-simulateur input[name=is_single]',
-        '.card-simulateur input[name=is_employee]',
-        '.card-simulateur input[name=gross_income]',
-        '.card-simulateur input[name=partner_is_employee]',
-        '.card-simulateur input[name=partner_gross_income]',
-      ].join(', ')
-    ).on('input', function () {
-      const $input = $(this);
-      const $simulator = $input.closest('.card-simulateur');
-
-      switch ($input.attr('name')) {
-        case 'is_single':
-          const $partnerField = $simulator.find('.partner_field');
-          if ($input.val() == 'true') {
-            $simulator.find('input[name=shares]').val(1);
-            $partnerField.css("display", "none");
-          } else {
-            $simulator.find('input[name=shares]').val(2);
-            $partnerField.css("display", "flex");
-          }
-          break;
-        case 'is_employee':
-          $simulator.find('.gross_income_label').html($input.val() == 'true' ? 'Revenu brut' : 'Bénéfice imposable');
-          break;
-        case 'partner_is_employee':
-          $simulator
-            .find('.partner_gross_income_label')
-            .html($input.val() == 'true' ? 'Revenu brut' : 'Bénéfice imposable');
-          break;
-      }
-      $simulator.updateInvestement();
-    });
-
-    // 1st Simulator – Age & Retirement Age inputs
-    $('#simulateur-1 input[name=age_range]').on('input', function () {
-      const $input = $(this);
-      const $simulator = $input.closest('.card-simulateur');
-      const age = Number($(this).val());
-      const $retirementAge = $simulator.find("input[name=retirement_age_range]");
-
-      $simulator.find('#age_text').html(`${age}&nbsp;ans`);
-      $retirementAge.attr("min", age + 8);
-      $retirementAge.trigger("change");
-    });
-
-    $('#simulateur-1 input[name=retirement_age_range]').on('change', function () {
-      const $input = $(this);
-      const $simulator = $input.closest('.card-simulateur');
-      let retirementAge = Number($(this).val());
-      const $age = $simulator.find('input[name=age_range]');
-      const age = Number($age.val());
-      const min = age + 8; 
-
-      if (retirementAge - age < 8) {
-        $input.val(min);
-        retirementAge = min;
-      }
-      $simulator.find('.retirement_age_text').html(`${retirementAge}&nbsp;ans`);
-
-      const $retirementInfo = $('#retirement_age_info');
-      if (retirementAge - $simulator.find('input[name=age_range]').val() > 30) {
-        $retirementInfo.html("&#9432; À plus de 30 ans de la retraite&nbsp;? Votre performance est calculée seulement sur les 30 premieres années.");
-      	$retirementInfo.show();
-      } else if ((retirementAge === Number($(this).attr("min"))) || age === Number($age.attr("max"))) {
-        $retirementInfo.html("&#9432; À moins de 8 ans de votre départ à la retraite&nbsp;? Contactez-nous, NUTKIN a une solution garantie pour maximiser vos rentes également.");
-      	$retirementInfo.show();
-      } else {
-      	$retirementInfo.hide();
-      }
-
-      updateFirstSimulator();
-    });
-
-    // 1st Simulator – Shares & Investment inputs
-    $(['#simulateur-1 input[name=shares]', '#simulateur-1 input[name=investment]'].join(', ')).on('input', updateFirstSimulator);
-
-    $('input[name=is_single][value=true]').attr('checked', true);
-    $('input[name=is_employee][value=true]').attr('checked', true);
-    $('input[name=partner_is_employee][value=true]').attr('checked', true);
-    $('input[name=gross_income]').attr('value', 100000);
-    $('input[name=partner_gross_income]').attr('value', 100000);
-    $('input[name=shares]').attr('value', 1);
-
-    $('#simulateur-1 input[name=age_range]').attr('value', 39);
-    $('#simulateur-1 input[name=retirement_age_range]').attr('value', 64);
-
-    // Update simulators results on first launch
-    $('#simulateur-1').updateInvestement();
-  });
-</script> -->
