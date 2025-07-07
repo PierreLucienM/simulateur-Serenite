@@ -523,7 +523,7 @@ const preventNumberInputFromChangingOnMouseWheel = () => {
 document.addEventListener('DOMContentLoaded', function () {
   preventNumberInputFromChangingOnMouseWheel()
   document.getElementById("tmi").value = 30;
-  document.getElementById("tis").value = 15;
+  document.getElementById("tis").value = 30;
 
   // Hide simulate button until all inputs are filled
   document.getElementById("simulate-button").style.display = "none";
